@@ -6,7 +6,13 @@ lib.ssMetadata = [];
 
 
 // symbols:
-// helper functions:
+
+
+
+(lib.pctRect = function() {
+	this.initialize(img.pctRect);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,207,208);// helper functions:
 
 function mc_symbol_clone() {
 	var clone = this._cloneProps(new this.constructor(this.mode, this.startPosition, this.loop));
@@ -28,13 +34,14 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 (lib.Rect = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
-	// 圖層_1
-	this.shape = new cjs.Shape();
-	this.shape.graphics.f("#FFFFFF").s().p("Ak1E2IAAprIJrAAIAAJrg");
+	// 圖層_2
+	this.instance = new lib.pctRect();
+	this.instance.parent = this;
+	this.instance.setTransform(-31,-31,0.3,0.3);
 
-	this.timeline.addTween(cjs.Tween.get(this.shape).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
-}).prototype = getMCSymbolPrototype(lib.Rect, new cjs.Rectangle(-31,-31,62,62), null);
+}).prototype = getMCSymbolPrototype(lib.Rect, new cjs.Rectangle(-31,-31,62,62.3), null);
 
 
 // stage content:
@@ -156,7 +163,9 @@ lib.properties = {
 	fps: 60,
 	color: "#000000",
 	opacity: 1.00,
-	manifest: [],
+	manifest: [
+		{src:"images/pctRect.png?1655913399563", id:"pctRect"}
+	],
 	preloads: []
 };
 
