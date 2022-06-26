@@ -31,7 +31,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	}
 
 
-(lib.Rect = function(mode,startPosition,loop) {
+(lib.Box = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// 圖層_2
@@ -41,7 +41,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
-}).prototype = getMCSymbolPrototype(lib.Rect, new cjs.Rectangle(-31,-31,62,62.3), null);
+}).prototype = getMCSymbolPrototype(lib.Box, new cjs.Rectangle(-31,-31,62,62.3), null);
 
 
 // stage content:
@@ -50,10 +50,15 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 	// timeline functions:
 	this.frame_0 = function() {
+		var box;
 		init()
 		
 		
 		function init(){
+			box = new lib.Box();//**lib
+			box.x= canvas.width/2;
+			box.y= canvas.height/2;
+			this.stage.addChild(box);//**this.stage
 			addMouseEvt();
 			//exportRoot.txt.visible = false
 		}
@@ -83,18 +88,21 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 			@target.addEventListener(@type,@func)
 		*/
 		function addMouseEvt(){
-			exportRoot.box.addEventListener("pressup",onPreesUp)
+			box.addEventListener("pressup",onPreesUp)
 			
 		}
 		
 		function removeMouseEvt(){
-			exportRoot.box.removeEventListener("pressup",onPreesUp)
+			box.removeEventListener("pressup",onPreesUp)
 		}
 		
 		function onPreesUp(evt){
+			console.log("onPreesUp");
+			
 			playBox()
 			removeMouseEvt()
 			addKeyEvt();
+			
 		}
 		
 		
@@ -108,7 +116,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 		*/
 		function playBox(){
 			console.log("playBox");
-			var box = exportRoot.box
+			//var box = exportRoot.box
 			createjs.Tween.get(box/*,{loop:true}*/)
 			.to({x:0,y:0},500,createjs.Ease.sineIn)
 			.to({x:box.x,y:box.y},500,createjs.Ease.sineOut)
@@ -123,8 +131,8 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 		} 
 		
 		function onUpdate(){
-			console.log(exportRoot.box.x)
-			exportRoot.txt.text=Math.floor(exportRoot.box.x);
+			console.log(box.x)
+			exportRoot.txt.text=Math.floor(box.x);
 		}
 		function onPlayOver(value){
 			console.log("onPlayOver::"+value)
@@ -145,16 +153,8 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 	this.timeline.addTween(cjs.Tween.get(this.txt).wait(1));
 
-	// 圖層_1
-	this.box = new lib.Rect();
-	this.box.name = "box";
-	this.box.parent = this;
-	this.box.setTransform(204.6,148.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.box).wait(1));
-
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(448.6,317.6,315.5,230.8);
+p.nominalBounds = new cjs.Rectangle(660,526.5,104,21.9);
 // library properties:
 lib.properties = {
 	id: '75D1CE7A2A95FB44A950BC01822ADE5E',
@@ -164,7 +164,7 @@ lib.properties = {
 	color: "#000000",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/pctRect.png?1655913399563", id:"pctRect"}
+		{src:"images/pctRect.png?1656247696476", id:"pctRect"}
 	],
 	preloads: []
 };
