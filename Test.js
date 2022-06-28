@@ -135,6 +135,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 			exportRoot.txt.text=Math.floor(box.x);
 		}
 		function onPlayOver(value){
+			addMouseEvt();
 			console.log("onPlayOver::"+value)
 		}
 	}
@@ -164,7 +165,7 @@ lib.properties = {
 	color: "#000000",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/pctRect.png?1656247696476", id:"pctRect"}
+		{src:"images/pctRect.png?1656420109217", id:"pctRect"}
 	],
 	preloads: []
 };
